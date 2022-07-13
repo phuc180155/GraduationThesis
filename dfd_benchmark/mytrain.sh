@@ -1,0 +1,1 @@
+python train.py --train_set /mnt/disk1/doan/phucnp/Dataset/dfdcv5/image/train --val_set /mnt/disk1/doan/phucnp/Dataset/dfdcv5/image/val --batch_size 16 --niter 30 --image_size 128 --workers 2 --checkpoint xception_checkpoint/ --gpu_id 2 --print_every 1000 xception_torch
