@@ -32,6 +32,22 @@ def get_datasetname(dir: str):
         return 'df_in_the_wildv6'
     if 'UADFV' in dir:
         return 'UADFV'
+    if '3dmm' in dir:
+        return '3dmm'
+    if 'deepfake' in dir:
+        return 'deepfake'
+    if 'faceswap_2d' in dir:
+        return 'faceswap_2d'
+    if 'faceswap_3d' in dir:
+        return 'faceswap_3d'
+    if 'monkey' in dir:
+        return 'monkey'
+    if 'reenact' in dir:
+        return 'reenact'
+    if 'stargan' in dir:
+        return 'stargan'
+    if 'x2face' in dir:
+        return 'x2face'
     if 'ff' in dir:
         if 'component' in dir:
             return 'ff_' + dir.split('/')[-1]

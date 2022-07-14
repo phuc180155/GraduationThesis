@@ -32,6 +32,7 @@ def train_visual(model_name: str, train_dir: str, val_dir: str, test_dir: str, c
         # test
         acc_fold = eval_visual(data=feature_fold_test, model_file=output_model_fold)
         os.rename(src=fold_ckcpoint, dst=join("/".join(fold_ckcpoint.split("/")[:-1]), '{}_fold_{}'.format(acc_fold, fold_idx)))
+        break
 
 def parse_args():
     """Parses input arguments."""

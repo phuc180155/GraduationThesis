@@ -17,7 +17,7 @@ def load_facedetector():
     """Loads dlib face and landmark detector."""
     dat_file = "/mnt/disk1/doan/phucnp/Graduation_Thesis/my_thesis/forensics/ml_technique/shape_predictor_68_face_landmarks.dat"
     if '/home/phucnp' in os.path.abspath(__file__):
-        dat_file = dat_file.replace("/mnt/disk1/doan", "/home")
+        dat_file = dat_file.replace("/mnt/disk1/doan/phucnp/Graduation_Thesis", "/home/phucnp/GraduationThesis")
     # download if missing http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
     if not os.path.isfile(dat_file):
         print ('Could not find shape_predictor_68_face_landmarks.dat.')
@@ -129,8 +129,8 @@ def extract_features_kfold(model_name: str, n_folds: int, use_trick: int, train_
     begin = time()
     feature_fold_train, feature_fold_test = [], []
     files = os.listdir(feature_ckcpoint)
-    if len(files):
-        feature_fold_train = [feature_ckcpoint + '/train_fold{}.pkl'.format(fold_idx) for fold_idx in range(n_folds)]
+    if len(files) != 2:
+        feature_fold_train = [feature_ckcpoint + '/train_fold{}.pkl'.format(fold_idx) for fold_idx in [0]]
         feature_fold_test = feature_ckcpoint + '/test.pkl'
         return feature_fold_train, feature_fold_test
         
@@ -141,6 +141,7 @@ def extract_features_kfold(model_name: str, n_folds: int, use_trick: int, train_
         output_fold = feature_ckcpoint + '/train_fold{}.pkl'.format(fold_idx)
         extract_features(real_path, fake_path, output_fold, -1)
         feature_fold_train.append(output_fold)
+        break
     # test
     testset = get_test_path(test_dir=test_dir)
     real_path, fake_path = split_real_fake(train_paths=testset)

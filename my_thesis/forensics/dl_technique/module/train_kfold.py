@@ -232,8 +232,8 @@ def train_kfold_image_stream(model_, what_fold='all', n_folds=5, use_trick=True,
             
         # Define Early stopping and Model saver
         early_stopping = EarlyStopping(patience=es_patience, verbose=True, tunning_metric=es_metric)
-        epoch_model_saver = ModelSaver(save_metrics=["val_loss", "val_acc", "test_loss", 'test_acc'])
-        step_model_saver = ModelSaver(save_metrics=["val_loss", "val_acc", "test_loss", 'test_acc'])
+        epoch_model_saver = ModelSaver(save_metrics=["val_loss", 'test_acc'])
+        step_model_saver = ModelSaver(save_metrics=["val_loss", 'test_acc'])
         
         # Define and load model
         model = model.to(device)
@@ -307,7 +307,7 @@ def train_kfold_image_stream(model_, what_fold='all', n_folds=5, use_trick=True,
                         test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros = eval_kfold_image_stream(model, dataloader_test, device, criterion, adj_brightness=adj_brightness, adj_contrast=adj_brightness)
                         save_result(step_test_writer, log, global_step, global_loss/global_step, global_acc/global_step, test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros, is_epoch=False, phase="test")
                         # Save model:
-                        step_model_saver(global_step, [val_loss, val_mic_acc, test_loss, test_mic_acc], step_ckcpoint, model)
+                        step_model_saver(global_step, [val_loss, test_mic_acc], step_ckcpoint, model)
                         step_model_saver.save_last_model(step_ckcpoint, model, global_step)
                         step_model_saver.save_model(step_ckcpoint, model, global_step, save_ckcpoint=False, global_acc=global_acc, global_loss=global_loss)
                     
@@ -316,7 +316,7 @@ def train_kfold_image_stream(model_, what_fold='all', n_folds=5, use_trick=True,
                         if early_stopping.early_stop:
                             print('Early stopping. Best {}: {:.6f}'.format(es_metric, early_stopping.best_score))
                             time.sleep(5)
-                            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], step_model_saver.best_scores[3], 'fold' if resume == '' else 'resume', fold_idx)))
+                            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx)))
                             next_fold = True
                         if next_fold:
                             break
@@ -337,7 +337,7 @@ def train_kfold_image_stream(model_, what_fold='all', n_folds=5, use_trick=True,
         time.sleep(5)
         # Save epoch acc val, epoch acc test, step acc val, step acc test
         if osp.exists(ckc_pointdir):
-            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], step_model_saver.best_scores[3], 'fold' if resume == '' else 'resume', fold_idx)))
+            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx)))
     return
 
 def eval_kfold_capsulenet(capnet, vgg_ext, dataloader, device, capsule_loss, adj_brightness=1.0, adj_contrast=1.0 ):
@@ -471,8 +471,8 @@ def train_kfold_capsulenet(what_fold='all', n_folds=5, use_trick=True, train_dir
             
         # Define Early stopping and Model saver
         early_stopping = EarlyStopping(patience=es_patience, verbose=True, tunning_metric=es_metric)
-        epoch_model_saver = ModelSaver(save_metrics=["val_loss", "val_acc", "test_loss", 'test_acc'])
-        step_model_saver = ModelSaver(save_metrics=["val_loss", "val_acc", "test_loss", 'test_acc'])
+        epoch_model_saver = ModelSaver(save_metrics=["val_loss", 'test_acc'])
+        step_model_saver = ModelSaver(save_metrics=["val_loss", 'test_acc'])
         
         if resume != "":
             capnet.load_state_dict(torch.load(osp.join(checkpoint, resume)))
@@ -565,7 +565,7 @@ def train_kfold_capsulenet(what_fold='all', n_folds=5, use_trick=True, train_dir
                         test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros = eval_kfold_capsulenet(capnet, vgg_ext, dataloader_test, device, capsule_loss, adj_brightness=adj_brightness, adj_contrast=adj_brightness)
                         save_result(step_test_writer, log, global_step, global_loss/global_step, global_acc/global_step, test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros, is_epoch=False, phase="test")
                         # Save model:
-                        step_model_saver(global_step, [val_loss, val_mic_acc, test_loss, test_mic_acc], step_ckcpoint, capnet)
+                        step_model_saver(global_step, [val_loss, test_mic_acc], step_ckcpoint, capnet)
                         step_model_saver.save_last_model(step_ckcpoint, capnet, global_step)
                         step_model_saver.save_model(step_ckcpoint, capnet, global_step, save_ckcpoint=False, global_acc=global_acc, global_loss=global_loss)
             
@@ -574,7 +574,7 @@ def train_kfold_capsulenet(what_fold='all', n_folds=5, use_trick=True, train_dir
                         if early_stopping.early_stop:
                             print('Early stopping. Best {}: {:.6f}'.format(es_metric, early_stopping.best_score))
                             time.sleep(5)
-                            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], step_model_saver.best_scores[3], 'fold' if resume == '' else 'resume', fold_idx)))
+                            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx)))
                             next_fold = True
                         if next_fold:
                             break
@@ -602,7 +602,7 @@ def train_kfold_capsulenet(what_fold='all', n_folds=5, use_trick=True, train_dir
         time.sleep(5)
         # Save epoch acc val, epoch acc test, step acc val, step acc test
         if osp.exists(ckc_pointdir):
-            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], step_model_saver.best_scores[3], 'fold' if resume == '' else 'resume', fold_idx)))
+            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx)))
     return
 
 
@@ -765,8 +765,8 @@ def train_kfold_dual_stream(model_, what_fold='all', n_folds=5, use_trick=True, 
 
         # Define Early stopping and Model saver
         early_stopping = EarlyStopping(patience=es_patience, verbose=True, tunning_metric=es_metric)
-        epoch_model_saver = ModelSaver(save_metrics=["val_loss", "val_acc", "test_loss", 'test_acc'])
-        step_model_saver = ModelSaver(save_metrics=["val_loss", "val_acc", "test_loss", 'test_acc'])
+        epoch_model_saver = ModelSaver(save_metrics=["val_loss", 'test_acc'])
+        step_model_saver = ModelSaver(save_metrics=["val_loss", 'test_acc'])
         
         # Define and load model
         
@@ -840,7 +840,7 @@ def train_kfold_dual_stream(model_, what_fold='all', n_folds=5, use_trick=True, 
                         test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros = eval_kfold_dual_stream(model, dataloader_test, device, criterion, adj_brightness=adj_brightness, adj_contrast=adj_brightness)
                         save_result(step_test_writer, log, global_step, global_loss/global_step, global_acc/global_step, test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros, is_epoch=False, phase="test")
                         # Save model:
-                        step_model_saver(global_step, [val_loss, val_mic_acc, test_loss, test_mic_acc], step_ckcpoint, model)
+                        step_model_saver(global_step, [val_loss, test_mic_acc], step_ckcpoint, model)
                         step_model_saver.save_last_model(step_ckcpoint, model, global_step)
                         step_model_saver.save_model(step_ckcpoint, model, global_step, save_ckcpoint=False, global_acc=global_acc, global_loss=global_loss)
 
@@ -849,7 +849,7 @@ def train_kfold_dual_stream(model_, what_fold='all', n_folds=5, use_trick=True, 
                         if early_stopping.early_stop:
                             print('Early stopping. Best {}: {:.6f}'.format(es_metric, early_stopping.best_score))
                             time.sleep(5)
-                            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], step_model_saver.best_scores[3], 'fold' if resume == '' else 'resume', fold_idx)))
+                            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx)))
                             next_fold = True
                         if next_fold:
                             break
@@ -870,7 +870,7 @@ def train_kfold_dual_stream(model_, what_fold='all', n_folds=5, use_trick=True, 
         time.sleep(5)
         # Save epoch acc val, epoch acc test, step acc val, step acc test
         if osp.exists(ckc_pointdir):
-            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], step_model_saver.best_scores[3], 'fold' if resume == '' else 'resume', fold_idx)))
+            os.rename(src=ckc_pointdir, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx)))
     return
 
 ########################################################

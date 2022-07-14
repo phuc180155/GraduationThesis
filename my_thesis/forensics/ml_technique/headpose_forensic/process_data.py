@@ -112,9 +112,10 @@ def extract_features_kfold(model_name: str, n_folds: int, use_trick: int, train_
     begin = time()
     feature_fold_train, feature_fold_test = [], []
     files = os.listdir(feature_ckcpoint)
-    if len(files):
+    if len(files) == n_folds + 1:
         feature_fold_train = [feature_ckcpoint + '/train_fold{}.pkl'.format(fold_idx) for fold_idx in range(n_folds)]
         feature_fold_test = feature_ckcpoint + '/test.pkl'
+        print("Extracted: ", time() - begin)
         return feature_fold_train, feature_fold_test
         
     for fold_idx in range(n_folds):

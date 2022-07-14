@@ -20,9 +20,9 @@ import glob
 face_detector, sp68 = load_facedetector()
 # face_crop_list, landmarks_list = get_crops_landmarks(face_detector, sp68, img)
 # print(landmarks_list)
-import dlib.cuda as cuda
-print(cuda.get_num_devices())
-print(dlib.DLIB_USE_CUDA)
+# import dlib.cuda as cuda
+# print(cuda.get_num_devices())
+# print(dlib.DLIB_USE_CUDA)
 # cv2.imshow("aaa",face_crop_list[0])
 # cv2.show()
 # cv2.waitKey()
