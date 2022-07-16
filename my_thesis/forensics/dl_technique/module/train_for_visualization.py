@@ -613,6 +613,5 @@ def train_kfold_pairwise_dual_stream_twooutput(model_, what_fold='all', n_folds=
             testacc_bce, testacctotal = get_test_metric(step_ckcpoint_dir=step_ckcpoint, bestacc=step_model_saver.best_scores[2], model_type="pairwise")
             dest = osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx))
             os.rename(src=ckc_pointdir, dst=dest)
-            next_fold = True  
             os.rename(src=dest, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.5f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[1], testacc_bce, testacctotal, step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx)))
     return
