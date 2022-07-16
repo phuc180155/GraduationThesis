@@ -138,24 +138,26 @@ def calRes(y_true_all, y_pred_all):
 
 import pandas as pd
 import os.path as osp
+import time
 
-def get_test_metric(step_ckcpoint_dir: str, model_type='pairwise', contain_fold=True):
+def get_test_metric(step_ckcpoint_dir: str, bestacc: float,  model_type='pairwise', contain_fold=True):
+    time.sleep(10)
     test_csv = osp.join(step_ckcpoint_dir, 'result_test.csv')
     val_csv = osp.join(step_ckcpoint_dir, 'result_val.csv')
     # read:
+    # print(test_csv)
+    # print(val_csv)
     test_df = pd.read_csv(test_csv)
     val_df = pd.read_csv(val_csv)
     #
     best_test_acc = test_df[" Test accuracy"].max(skipna=True)
     fold_info = step_ckcpoint_dir.split('/')[-2]
-    if '(' in fold_info and ')' in fold_info:
-        fold_info = fold_info.replace('(', '').replace(')', '').strip()
-        bestacc = float(fold_info.split('_')[-1])
-        if bestacc == "{:.4f}".format(best_test_acc):
-            print("Error some where!")
-            print("best acc from fold: ", bestacc)
-            print("best acc from file: ", best_test_acc)
-            return None
+
+    if abs(bestacc - best_test_acc) > 1e-2:
+        print("Error some where!")
+        print("best acc from fold: ", bestacc)
+        print("best acc from file: ", best_test_acc)
+        return None
 
     if model_type == 'pairwise':
         idx_min_bceloss, idx_min_totalloss = val_df[" Val bce loss"].idxmin(skipna=True), val_df[" Val total loss"].idxmin(skipna=True)

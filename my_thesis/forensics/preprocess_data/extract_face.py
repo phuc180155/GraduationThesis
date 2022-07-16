@@ -124,10 +124,20 @@ def extract_face(video_path: str, ext_margin=0.2):
 
 
 args = parse_args()
+### Step 1: Giải quyết real:
+#    +) Tách 800 video train/200 video test.
+#    +) Extract ra image.
+#    +) Đặt vào all/deepfake/f2f/fs/nt train/0_real - 800 và test/0_real - 200
+### Step 2: Giải quyết fake:
+#   +) Với mỗi technique fake, tách ra 800/200: train/1_df - test/1_df
+#   +) Extract tương ứng cho từng technique
+#   +) Gộp lại đặt trong all
 if __name__ == '__main__':
     video_paths = []
     video_types = ['/*.mp4', '/*/*/*/*.avi']  # Deepfakes/c23/videos/*.mp4
     in_dir = '/mnt/disk1/doan/phucnp/Graduation_Thesis/my_thesis/forensics/preprocess_data/test'
+    args.out_dir = ""
+    args.duration = 15
     # Duyệt tất cả các path tới video
     for type in video_types:
         paths = glob.glob(in_dir + type)

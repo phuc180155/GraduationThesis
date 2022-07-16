@@ -582,12 +582,13 @@ def train_kfold_pairwise_dual_stream_twooutput(model_, what_fold='all', n_folds=
                         if early_stopping.early_stop:
                             print('Early stopping. Best {}: {:.6f}'.format(es_metric, early_stopping.best_score))
                             time.sleep(5)
-                            
+                            step_val_writer.close()
+                            step_test_writer.close()  
+                            testacc_bce, testacctotal = get_test_metric(step_ckcpoint_dir=step_ckcpoint, bestacc=step_model_saver.best_scores[2], model_type="pairwise")
                             dest = osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx))
                             os.rename(src=ckc_pointdir, dst=dest)
-                            next_fold = True
-                            testacc_bce, testacctotal = get_test_metric(step_ckcpoint_dir=step_ckcpoint, model_type="pairwise")
-                            os.rename(src=dest, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f})_{}_{}".format(testacc_bce, testacctotal, step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx)))
+                            next_fold = True  
+                            os.rename(src=dest, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.5f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[1], testacc_bce, testacctotal, step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx)))
 
                         if next_fold:
                             break
@@ -607,8 +608,11 @@ def train_kfold_pairwise_dual_stream_twooutput(model_, what_fold='all', n_folds=
         time.sleep(5)
         # Save epoch acc val, epoch acc test, step acc val, step acc test
         if osp.exists(ckc_pointdir):
+            step_val_writer.close()
+            step_test_writer.close()
+            testacc_bce, testacctotal = get_test_metric(step_ckcpoint_dir=step_ckcpoint, bestacc=step_model_saver.best_scores[2], model_type="pairwise")
             dest = osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], step_model_saver.best_scores[1], step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx))
             os.rename(src=ckc_pointdir, dst=dest)
-            testacc_bce, testacctotal = get_test_metric(step_ckcpoint_dir=step_ckcpoint, model_type="pairwise")
-            os.rename(src=dest, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f})_{}_{}".format(testacc_bce, testacctotal, step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx)))
+            next_fold = True  
+            os.rename(src=dest, dst=osp.join(checkpoint, args_txt if resume == '' else '', "({:.5f}_{:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[1], testacc_bce, testacctotal, step_model_saver.best_scores[2], 'fold' if resume == '' else 'resume', fold_idx)))
     return
