@@ -47,10 +47,10 @@ class CustomizeKFold(object):
         self.num_real_videos, self.num_fake_videos = len(self.real_video_names), len(self.fake_video_names)
         random.shuffle(self.real_video_names)
         random.shuffle(self.fake_video_names)
-        # print("real video: ", self.num_real_videos)
+        print("real video: ", self.num_real_videos)
         # print("Sample list real: ", self.real_video_names[0], self.real_video_names[-1])
         # print("Sample list dict real: ", (self.real_video_names[0], self.real_videos[self.real_video_names[0]]), (self.real_video_names[-1], self.real_videos[self.real_video_names[-1]]))
-        # print("\nfake video: ", self.num_fake_videos)
+        print("fake video: ", self.num_fake_videos)
         # print("Sample list fake: ", self.fake_video_names[0], self.fake_video_names[-1])
         # print("Sample list dict fake: ", (self.fake_video_names[0], self.fake_videos[self.fake_video_names[0]]), (self.fake_video_names[-1], self.fake_videos[self.fake_video_names[-1]]))
 
@@ -256,7 +256,12 @@ class CustomizeKFold(object):
             'monkey': '61',
             'reenact': '61',
             'stargan': '61',
-            'x2face': '61'
+            'x2face': '61',
+            'ff_df': '8',
+            'ff_f2f': '8',
+            'ff_fs': '8',
+            'ff_nt': '8',
+            'ff_all': '8'
         }
         if dataset_pos[datasetname] == curdev:
             return False, 'trainfile', 'valfile', '', ''
@@ -321,6 +326,26 @@ class CustomizeKFold(object):
                 prefix_old = '/mnt/disk1/doan/'
                 prefix_new = '/home/'
                 return True, 'inspect/61x2face/train/fold_{}.txt'.format(fold_idx), 'inspect/61x2face/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+            if datasetname == 'ff_df':
+                prefix_new = '/mnt/disk1/doan/'
+                prefix_old = '/home/'
+                return True, 'inspect/8ff_df/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_df/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+            if datasetname == 'ff_f2f':
+                prefix_new = '/mnt/disk1/doan/'
+                prefix_old = '/home/'
+                return True, 'inspect/8ff_f2f/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_f2f/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+            if datasetname == 'ff_fs':
+                prefix_new = '/mnt/disk1/doan/'
+                prefix_old = '/home/'
+                return True, 'inspect/8ff_fs/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_fs/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+            if datasetname == 'ff_nt':
+                prefix_new = '/mnt/disk1/doan/'
+                prefix_old = '/home/'
+                return True, 'inspect/8ff_nt/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_nt/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+            if datasetname == 'ff_all':
+                prefix_new = '/mnt/disk1/doan/'
+                prefix_old = '/home/'
+                return True, 'inspect/8ff_all/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_all/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
 
     def get_curdevice(self):
         return '61' if '/mnt/disk1/doan' in self.train_dir else '8'
@@ -356,6 +381,18 @@ class CustomizeKFold(object):
             return 'stargan'
         if 'x2face' in self.train_dir:
             return 'x2face'
+        if 'ff' in self.train_dir:
+            if 'all' in self.train_dir:
+                return 'ff_all'
+            if 'component' in self.train_dir:
+                if 'Deepfakes' in self.train_dir:
+                    return 'ff_df'
+                if 'Face2Face' in self.train_dir:
+                    return 'ff_f2f'
+                if 'FaceSwap' in self.train_dir:
+                    return 'ff_fs'
+                if 'NeuralTexture' in self.train_dir:
+                    return 'ff_nt'
         return ''
         
 

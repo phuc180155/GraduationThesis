@@ -329,23 +329,23 @@ class CustomizeKFold(object):
             if datasetname == 'ff_df':
                 prefix_new = '/mnt/disk1/doan/'
                 prefix_old = '/home/'
-                return True, 'inspect/61ff_df/train/fold_{}.txt'.format(fold_idx), 'inspect/61ff_df/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+                return True, 'inspect/8ff_df/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_df/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
             if datasetname == 'ff_f2f':
                 prefix_new = '/mnt/disk1/doan/'
                 prefix_old = '/home/'
-                return True, 'inspect/61ff_f2f/train/fold_{}.txt'.format(fold_idx), 'inspect/61ff_f2f/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+                return True, 'inspect/8ff_f2f/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_f2f/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
             if datasetname == 'ff_fs':
                 prefix_new = '/mnt/disk1/doan/'
                 prefix_old = '/home/'
-                return True, 'inspect/61ff_fs/train/fold_{}.txt'.format(fold_idx), 'inspect/61ff_fs/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+                return True, 'inspect/8ff_fs/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_fs/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
             if datasetname == 'ff_nt':
                 prefix_new = '/mnt/disk1/doan/'
                 prefix_old = '/home/'
-                return True, 'inspect/61ff_nt/train/fold_{}.txt'.format(fold_idx), 'inspect/61ff_nt/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+                return True, 'inspect/8ff_nt/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_nt/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
             if datasetname == 'ff_all':
                 prefix_new = '/mnt/disk1/doan/'
                 prefix_old = '/home/'
-                return True, 'inspect/61ff_all/train/fold_{}.txt'.format(fold_idx), 'inspect/61ff_all/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
+                return True, 'inspect/8ff_all/train/fold_{}.txt'.format(fold_idx), 'inspect/8ff_all/val/fold_{}.txt'.format(fold_idx), prefix_old, prefix_new
 
     def get_curdevice(self):
         return '61' if '/mnt/disk1/doan' in self.train_dir else '8'
