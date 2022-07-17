@@ -11,8 +11,8 @@ from utils import *
 import torch
 import os
 
-torch.multiprocessing.set_start_method('spawn')
-device = torch.device('cpu' if not torch.cuda.is_available() else 'cuda')
+# torch.multiprocessing.set_start_method('spawn')
+device = torch.device('cuda' if not torch.cuda.is_available() else 'cpu')
 face_detector = MTCNN(device=device)
 
 fake_image_dir = "../../../../2_Deep_Learning/Dataset/facial_forgery/FF+/image/fake"
@@ -31,8 +31,8 @@ def parse_args():
 
 def extract_frame(video_path):
     # 
-    output_dir = args.out_dir
-    duration = args.duration
+    output_dir = out_dir
+    duration = durationss
 
     # Đọc video với videoCapture
     video = cv2.VideoCapture(video_path)
@@ -65,18 +65,18 @@ def extract_frame(video_path):
         id_frame += 1
         
 
-def extract_face(video_path: str, ext_margin=0.2):
+def extract_face(video_path: str, out_dir: str, durationss: int, forgery_tech: str, ext_margin=0.2):
     #
     # forgery_tech = video_path.split('/')[-4]
-    output_dir = args.out_dir if args.out_dir != '' else real_image_dir
-    duration = args.duration
+    output_dir = out_dir if out_dir != '' else real_image_dir
+    duration = durationss
     # Read video:
 
     video = cv2.VideoCapture(video_path)
     video_name = osp.basename(video_path).split('.')[0]
 
     # print("Forgery Tech: ", forgery_tech)
-    print("Video name: ", video_name)
+    # print("Video name: ", video_name)
     # if not osp.exists(osp.join(output_dir, forgery_tech)):
     #     os.mkdir(osp.join(output_dir, forgery_tech))
     #
@@ -116,14 +116,14 @@ def extract_face(video_path: str, ext_margin=0.2):
 
         face = image[ymin:ymax, xmin:xmax]
         # Save to output dir:
-        # plt.imsave(osp.join(output_dir, forgery_tech, video_name + '_' + str(id_frame) + '.jpg'), face, format='jpg')
-        plt.imsave(osp.join(output_dir, video_name + '_' + str(id_frame) + '.jpg'), face, format='jpg')
+        plt.imsave(osp.join(output_dir, forgery_tech + video_name + '_' + str(id_frame) + '.jpg'), face, format='jpg')
+        # plt.imsave(osp.join(output_dir, video_name + '_' + str(id_frame) + '.jpg'), face, format='jpg')
 
         id_frame += 1
-    print("Number of taken frame: {}\n".format(id_frame))
+    # print("Number of taken frame: {}".format(id_frame))
 
 
-args = parse_args()
+# args = parse_args()
 ### Step 1: Giải quyết real:
 #    +) Tách 800 video train/200 video test.
 #    +) Extract ra image.
@@ -132,13 +132,53 @@ args = parse_args()
 #   +) Với mỗi technique fake, tách ra 800/200: train/1_df - test/1_df
 #   +) Extract tương ứng cho từng technique
 #   +) Gộp lại đặt trong all
+###
+# df: test - ok: 4047, train - ok: 15831
+# f2f: test - ok , train - ok: 16122
+# fs: test - ok, train- process...
+# nt:test - ok,
+# real: test - ok: 4047, train - process...
+
+from tqdm import tqdm
+
 if __name__ == '__main__':
     video_paths = []
     video_types = ['/*.mp4', '/*/*/*/*.avi']  # Deepfakes/c23/videos/*.mp4
-    in_dir = '/mnt/disk1/doan/phucnp/Graduation_Thesis/my_thesis/forensics/preprocess_data/test'
-    args.out_dir = ""
-    args.duration = 15
+
     # Duyệt tất cả các path tới video
+    # in_dir = '/mnt/disk1/doan/phucnp/Dataset/ff/video/original_sequences/train'
+    # out_dir = "/mnt/disk1/doan/phucnp/Dataset/ff/video/original_sequences/image/train"
+    # durationss = 35
+    # for type in video_types:
+    #     paths = glob.glob(in_dir + type)
+    #     video_paths.extend(paths)
+
+    # print("Paths: ", len(video_paths))
+
+    # # Sử dụng tính toán đa luồng
+    # for path in tqdm(video_paths):
+    #     extract_face(video_path=path, out_dir=out_dir, durationss=durationss, forgery_tech="origin_")
+    # print(len(os.listdir("/mnt/disk1/doan/phucnp/Dataset/ff/video/original_sequences/image/train")))
+
+    # in_dir = '/mnt/disk1/doan/phucnp/Dataset/ff/video/manipulated_sequences/FaceSwap/train'
+    # out_dir = "/mnt/disk1/doan/phucnp/Dataset/ff/video/manipulated_sequences/FaceSwap/image/train"
+    # durationss = 35
+    # video_paths = []
+    # for type in video_types:
+    #     paths = glob.glob(in_dir + type)
+    #     video_paths.extend(paths)
+
+    # print("Paths: ", len(video_paths))
+
+    # # Sử dụng tính toán đa luồng
+    # for path in tqdm(video_paths):
+    #     extract_face(video_path=path, out_dir=out_dir, durationss=durationss, forgery_tech="faceswap_")
+    # print(len(os.listdir("/mnt/disk1/doan/phucnp/Dataset/ff/video/manipulated_sequences/FaceSwap/image/train")))
+
+    in_dir = '/mnt/disk1/doan/phucnp/Dataset/ff/video/manipulated_sequences/NeuralTextures/train'
+    out_dir = "/mnt/disk1/doan/phucnp/Dataset/ff/video/manipulated_sequences/NeuralTextures/image/train"
+    durationss = 35
+    video_paths = []
     for type in video_types:
         paths = glob.glob(in_dir + type)
         video_paths.extend(paths)
@@ -146,6 +186,7 @@ if __name__ == '__main__':
     print("Paths: ", len(video_paths))
 
     # Sử dụng tính toán đa luồng
-    for path in video_paths:
-        extract_face(path)
+    for path in tqdm(video_paths):
+        extract_face(video_path=path, out_dir=out_dir, durationss=durationss, forgery_tech="neuraltexture_")
+    print(len(os.listdir("/mnt/disk1/doan/phucnp/Dataset/ff/video/manipulated_sequences/NeuralTextures/image/train")))
     
