@@ -50,7 +50,7 @@ def get_datasetname(dir: str):
         return 'x2face'
     if 'ff' in dir:
         if 'component' in dir:
-            return 'ff_' + dir.split('/')[-1]
+            return 'ff_' + dir.split('/')[-2]
         if 'all' in dir:
             return 'ff_all'
 
