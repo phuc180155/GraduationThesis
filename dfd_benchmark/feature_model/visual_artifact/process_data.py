@@ -25,9 +25,9 @@ def load_facedetector():
     return face_detector, sp68
 
 face_detector, sp68 = load_facedetector()
-import dlib.cuda as cuda
-print(cuda.get_num_devices())
-print(dlib.DLIB_USE_CUDA)
+# import dlib.cuda as cuda
+# print(cuda.get_num_devices())
+# print(dlib.DLIB_USE_CUDA)
 
 
 

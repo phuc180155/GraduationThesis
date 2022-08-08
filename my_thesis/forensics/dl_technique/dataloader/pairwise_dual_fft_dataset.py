@@ -12,7 +12,7 @@ from dataloader.utils import azimuthalAverage
 import copy
 
 class PairwiseDualFFTMagnitudeImageDataset(Dataset):
-    def __init__(self, path=None, image_size=128, transform=None, transform_fft=None, should_invert=True,shuffle=True, adj_brightness=None, adj_contrast=None, dset=None):
+    def __init__(self, path=None, image_size=128, transform=None, transform_fft=None, should_invert=True,shuffle=True, adj_brightness=None, adj_contrast=None, dset=None, usephase=False):
         self.path = path
         # self.imageFolderDataset = ImageFolder(path)
         self.image_size = image_size
@@ -30,6 +30,7 @@ class PairwiseDualFFTMagnitudeImageDataset(Dataset):
         else:
             data_path = copy.deepcopy(dset)
         self.data_path = data_path
+        self.usephase = usephase
         np.random.shuffle(self.data_path)
         self.indexes = range(len(self.data_path))
         self.on_epoch_end()
@@ -120,6 +121,8 @@ class PairwiseDualFFTMagnitudeImageDataset(Dataset):
         fshift += 1e-8
         # Generate magnitude spectrum image
         magnitude_spectrum = np.log(np.abs(fshift))
+        if self.usephase:
+            magnitude_spectrum = np.angle(fshift)
         magnitude_spectrum = cv2.resize(magnitude_spectrum, (self.image_size,self.image_size))
         magnitude_spectrum = np.array([magnitude_spectrum])
         magnitude_spectrum = np.transpose(magnitude_spectrum, (1, 2, 0))    # From C, H, W =>  H, W, C

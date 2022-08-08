@@ -20,3 +20,7 @@ my_thesis/forensics/ml_technique/headpose_forensic/output_features
 my_thesis/forensics/ml_technique/spectrum/output_features
 my_thesis/forensics/ml_technique/visual_artifact/output_features
 my_thesis/forensics/ml_technique/bash
+# other_model_repo
+# dfd_benchmark
+my_thesis/forensics/dl_technique/checkpoint_visualize
+my_thesis/forensics/dl_technique/visualize

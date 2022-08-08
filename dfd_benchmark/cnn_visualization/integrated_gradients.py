@@ -5,8 +5,11 @@ Created on Wed Jun 19 17:06:48 2019
 """
 import torch
 import numpy as np
+import sys, os
+sys.path.append(os.path.dirname(__file__))
+print(sys.path)
 
-from cnn_visualization.misc_functions import get_example_params, convert_to_grayscale, save_gradient_images
+from misc_functions import get_example_params, convert_to_grayscale, save_gradient_images
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # see issue #152
 
@@ -30,7 +33,8 @@ class IntegratedGradients():
 
         # Register hook to the first layer
         # print(list(self.model.base[0][:-1]._modules.items())[0][1].conv1.conv)
-        first_layer = list(self.model.base[0][:-1]._modules.items())[0][1].conv1.conv  # xception
+        # print(self.model)
+        first_layer = list(self.model.base_net[0][:-1]._modules.items())[0][1].conv1.conv  # xception
         # print(list(self.model.layer1._modules.items()))
         # first_layer = self.model.conv1  # resnext50
 
@@ -74,45 +78,47 @@ class IntegratedGradients():
         # [0] to get rid of the first channel (1,3,224,224)
         return integrated_grads[0]
 
-from pytorch_model.capsule_pytorch.model import VggExtractor, CapsuleNet, CapsuleLoss
+# from pytorch_model.capsule_pytorch.model import VggExtractor, CapsuleNet, CapsuleLoss
 from torch import nn
-class CapsuleNet_2(nn.Module):
-    def __init__(self):
-        super(CapsuleNet_2, self).__init__()
-        self.vgg_ext = VggExtractor()
-        self.capnet = CapsuleNet(2, gpu_id=-1)
-        for param in self.vgg_ext.parameters():
-            param.requires_grad = True
-    def forward(self, x):
-        x = self.vgg_ext(x)
-        class_ = self.capnet(x)
-        # return classes
-        return class_
+# class CapsuleNet_2(nn.Module):
+#     def __init__(self):
+#         super(CapsuleNet_2, self).__init__()
+#         self.vgg_ext = VggExtractor()
+#         self.capnet = CapsuleNet(2, gpu_id=-1)
+#         for param in self.vgg_ext.parameters():
+#             param.requires_grad = True
+#     def forward(self, x):
+#         x = self.vgg_ext(x)
+#         class_ = self.capnet(x)
+#         # return classes
+#         return class_
 from torch.autograd import Variable
 import glob
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 if __name__ == '__main__':
     # Get params
     target_example = 0  # Snake
-    from pytorch_model.xception import xception
+    from xception import xception
 
     model = xception(pretrained=False)
     device = torch.device("cuda" if torch.cuda.is_available()
                           else "cpu")
+    
     # from pytorch_model.model_cnn_pytorch import resnext50
     # model = resnext50()
     # model = model.to(device)
 
     # model = CapsuleNet_2()
     # model = torch.nn.Sequential([vgg_ext,capnet])
-    model = model
+    # model = model.to(device)
     # model.load_state_dict(torch.load("../../../../model/xception/model_pytorch_4.pt",map_location=torch.device('cpu')))
-    for data_type in ['df','3dmm','fs2d','fs3d','monkey','reenact','star','x2face']:
-        data_folder = "/hdd/tam/dfd_benmark/code/dfd_benchmark_local/results/df/" + data_type +"/*.jpg"
-        model_path = "/hdd/tam/dfd_benmark/code/dfd_benchmark/xception_"+data_type+"_checkpoint/model_pytorch_3.pt"
+    for data_type in ['faceswap_2d','faceswap_3d','monkey','reenact','stargan','x2face', 'deepfake', '3dmm']:
+        data_folder = "/mnt/disk1/doan/phucnp/Dataset/my_extend_data/extend_data_train/{}/test/1_df/*.jpg".format(data_type)
+        model_path = "/mnt/disk1/doan/phucnp/Graduation_Thesis/my_thesis/forensics/dl_technique/checkpoint_visualize/{}/best_test_acc.pt".format(data_type)
         model.load_state_dict(
             torch.load(model_path,
-                       map_location=torch.device('cpu')))
+                       map_location=torch.device('cuda')))
         # model.load_state_dict(torch.load("/hdd/tam/dfd_benmark/code/dfd_benchmark/xception_reenact_checkpoint/model_pytorch_3.pt",map_location=torch.device('cpu')))
         # model.load_state_dict(torch.load("../../../model/resnext50/model_pytorch_4.pt",map_location=torch.device('cpu')))
         # model.load_state_dict(torch.load(os.path.join("/hdd/tam/dfd_benmark/code/dfd_benchmark/capsule_df_checkpoint/",'capsule_' + str(3) + '.pt'),map_location=torch.device('cpu')))
@@ -121,6 +127,7 @@ if __name__ == '__main__':
         # print(model)
         # print(model.base[0][:-1][0].conv1.conv)
         IG = IntegratedGradients(model)
+        cnt = 0
 
         for target_example in range(len(glob.glob(data_folder))):
             (original_image, prep_img, target_class, file_name_to_export,original_image) =\
@@ -129,6 +136,8 @@ if __name__ == '__main__':
             # print(original_image)
             # Vanilla backprop
             # Generate gradients
+            # prep_img = prep_img.to(device)
+            # target_class = target_class.to(device)
             integrated_grads = IG.generate_integrated_gradients(prep_img, target_class, 5)
             # Convert to grayscale
             grayscale_integrated_grads = convert_to_grayscale(integrated_grads)
@@ -136,3 +145,6 @@ if __name__ == '__main__':
             # file_name_to_export = ""
             save_gradient_images(grayscale_integrated_grads, file_name_to_export + '_Integrated_G_gray_'+data_type,original_image,data_type)
             print('Integrated gradients completed.')
+            cnt += 1
+            if cnt == 200:
+                print("Done dataset: ", data_type)

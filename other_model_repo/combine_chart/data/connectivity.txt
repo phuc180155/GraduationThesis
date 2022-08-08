@@ -1,0 +1,277 @@
+"Accuracy: 0.7450
+MAP: 0.8009
+AUC: 0.9969
+Hit-precision: 0.9969
+Precision_5: 0.8830
+Precision_10: 0.9030
+Time: 3.40
+"	"Accuracy: 0.7290
+MAP: 0.7851
+AUC: 0.9966
+Hit-precision: 0.9966
+Precision_5: 0.8540
+Precision_10: 0.8860
+Time: 3.38
+"	"Accuracy: 0.6830
+MAP: 0.7401
+AUC: 0.9959
+Hit-precision: 0.9959
+Precision_5: 0.8180
+Precision_10: 0.8580
+Time: 3.45
+"	"Accuracy: 0.6740
+MAP: 0.7403
+AUC: 0.9960
+Hit-precision: 0.9960
+Precision_5: 0.8250
+Precision_10: 0.8760
+Time: 3.52
+"	"Accuracy: 0.7260
+MAP: 0.7740
+AUC: 0.9968
+Hit-precision: 0.9968
+Precision_5: 0.8600
+Precision_10: 0.8920
+Time: 3.54
+"	"Accuracy: 0.7750
+MAP: 0.8090
+AUC: 0.9975
+Hit-precision: 0.9975
+Precision_5: 0.8940
+Precision_10: 0.9200
+Time: 3.63
+"
+"Accuracy: 0.6260
+MAP: 0.3908
+AUC: 0.9944
+Hit-precision: 0.9944
+Precision_5: 0.6050
+Precision_10: 0.7970
+Time: 5.18"	"Accuracy: 0.7780
+MAP: 0.4715
+AUC: 0.9956
+Hit-precision: 0.9956
+Precision_5: 0.7030
+Precision_10: 0.8560
+Time: 3.95"	"Accuracy: 0.8920
+MAP: 0.5051
+AUC: 0.9962
+Hit-precision: 0.9962
+Precision_5: 0.7270
+Precision_10: 0.8840
+Time: 4.15"	"Accuracy: 0.9100
+MAP: 0.5162
+AUC: 0.9961
+Hit-precision: 0.9961
+Precision_5: 0.7340
+Precision_10: 0.8770
+Time: 5.44"	"Accuracy: 0.9280
+MAP: 0.5368
+AUC: 0.9964
+Hit-precision: 0.9964
+Precision_5: 0.7280
+Precision_10: 0.9020
+Time: 3.85"	"Accuracy: 0.9220
+MAP: 0.5320
+AUC: 0.9967
+Hit-precision: 0.9967
+Precision_5: 0.7560
+Precision_10: 0.9080
+Time: 3.64"
+"Accuracy: 0.0350
+MAP: 0.0075
+AUC: 0.5004
+Hit-precision: 0.5008
+Precision_5: 0.0050
+Precision_10: 0.0100
+Time: 2.75"	"Accuracy: 0.0380
+MAP: 0.0075
+AUC: 0.5004
+Hit-precision: 0.5009
+Precision_5: 0.0050
+Precision_10: 0.0100
+Time: 2.84"	"Accuracy: 0.0290
+MAP: 0.0075
+AUC: 0.5003
+Hit-precision: 0.5008
+Precision_5: 0.0050
+Precision_10: 0.0100
+Time: 3.48"	"Accuracy: 0.0230
+MAP: 0.0075
+AUC: 0.5003
+Hit-precision: 0.5008
+Precision_5: 0.0050
+Precision_10: 0.0100
+Time: 2.42"	"Accuracy: 0.0230
+MAP: 0.0075
+AUC: 0.5003
+Hit-precision: 0.5008
+Precision_5: 0.0050
+Precision_10: 0.0100
+Time: 2.09"	"Accuracy: 0.0430
+MAP: 0.0075
+AUC: 0.5004
+Hit-precision: 0.5009
+Precision_5: 0.0050
+Precision_10: 0.0100
+Time: 2.14"
+"Accuracy: 0.3470
+MAP: 0.0301
+AUC: 0.8590
+Hit-precision: 0.8592
+Precision_5: 0.0270
+Precision_10: 0.0590
+Time: 0.18"	"Accuracy: 0.3670
+MAP: 0.0311
+AUC: 0.8548
+Hit-precision: 0.8550
+Precision_5: 0.0260
+Precision_10: 0.0510
+Time: 0.05"	"Accuracy: 0.3310
+MAP: 0.0307
+AUC: 0.8582
+Hit-precision: 0.8584
+Precision_5: 0.0270
+Precision_10: 0.0500
+Time: 0.15"	"Accuracy: 0.3930
+MAP: 0.0304
+AUC: 0.8524
+Hit-precision: 0.8525
+Precision_5: 0.0250
+Precision_10: 0.0470
+Time: 0.10"	"Accuracy: 0.3240
+MAP: 0.0290
+AUC: 0.8539
+Hit-precision: 0.8541
+Precision_5: 0.0260
+Precision_10: 0.0540
+Time: 0.07"	"Accuracy: 0.2560
+MAP: 0.0286
+AUC: 0.8590
+Hit-precision: 0.8592
+Precision_5: 0.0220
+Precision_10: 0.0450
+Time: 0.13"
+"Accuracy: 0.6488
+MAP: 0.3180
+AUC: 0.9733
+Hit-precision: 0.9733
+Precision_5: 0.7137
+Precision_10: 0.8325
+Time: 8.52
+"	"Accuracy: 0.6250
+MAP: 0.3034
+AUC: 0.9712
+Hit-precision: 0.9712
+Precision_5: 0.6700
+Precision_10: 0.7837
+Time: 8.56
+"	"Accuracy: 0.5650
+MAP: 0.3038
+AUC: 0.9583
+Hit-precision: 0.9583
+Precision_5: 0.5962
+Precision_10: 0.7025
+Time: 8.59
+"	"Accuracy: 0.5687
+MAP: 0.3069
+AUC: 0.9611
+Hit-precision: 0.9612
+Precision_5: 0.5962
+Precision_10: 0.6963
+Time: 6.98
+"	"Accuracy: 0.4688
+MAP: 0.2708
+AUC: 0.9377
+Hit-precision: 0.9378
+Precision_5: 0.4950
+Precision_10: 0.5813
+Time: 8.55
+"	"Accuracy: 0.4550
+MAP: 0.2605
+AUC: 0.9392
+Hit-precision: 0.9392
+Precision_5: 0.4700
+Precision_10: 0.5625
+Time: 8.51
+"
+"Accuracy: 0.4587
+MAP: 0.6500
+AUC: 0.9891
+Hit-precision: 0.9891
+Precision_5: 0.7963
+Precision_10: 0.8838
+Time: 868.78"	"Accuracy: 0.6238
+MAP: 0.7730
+AUC: 0.9926
+Hit-precision: 0.9926
+Precision_5: 0.9050
+Precision_10: 0.9425
+Time: 781.08"	"Accuracy: 0.6525
+MAP: 0.8056
+AUC: 0.9969
+Hit-precision: 0.9969
+Precision_5: 0.9038
+Precision_10: 0.9487
+Time: 877.13"	"Accuracy: 0.7137
+MAP: 0.8622
+AUC: 0.9977
+Hit-precision: 0.9977
+Precision_5: 0.9400
+Precision_10: 0.9600
+Time: 794.28"	"Accuracy: 0.7013
+MAP: 0.8487
+AUC: 0.9965
+Hit-precision: 0.9965
+Precision_5: 0.9213
+Precision_10: 0.9437
+Time: 796.50"	"Accuracy: 0.7100
+MAP: 0.8425
+AUC: 0.9925
+Hit-precision: 0.9925
+Precision_5: 0.9125
+Precision_10: 0.9325
+Time: 784.36"
+"Accuracy: 0.6900
+MAP: 0.3817
+AUC: 0.9949
+Hit-precision: 0.9950
+Precision_5: 0.6737
+Precision_10: 0.8938
+Time: 122.10
+"	"Accuracy: 0.7850
+MAP: 0.4456
+AUC: 0.9951
+Hit-precision: 0.9951
+Precision_5: 0.7288
+Precision_10: 0.8925
+Time: 124.73
+"	"Accuracy: 0.8363
+MAP: 0.4800
+AUC: 0.9952
+Hit-precision: 0.9952
+Precision_5: 0.7725
+Precision_10: 0.8912
+Time: 120.73
+"	"Accuracy: 0.8025
+MAP: 0.4743
+AUC: 0.9935
+Hit-precision: 0.9935
+Precision_5: 0.7575
+Precision_10: 0.8800
+Time: 135.07
+"	"Accuracy: 0.8050
+MAP: 0.4989
+AUC: 0.9940
+Hit-precision: 0.9940
+Precision_5: 0.7662
+Precision_10: 0.8675
+Time: 121.72
+"	"Accuracy: 0.7450
+MAP: 0.4705
+AUC: 0.9916
+Hit-precision: 0.9916
+Precision_5: 0.7212
+Precision_10: 0.8363
+Time: 124.34
+"

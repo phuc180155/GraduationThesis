@@ -68,15 +68,15 @@ class EfficientSuppression(nn.Module):
 if __name__ == "__main__":
     loss = nn.CrossEntropyLoss()
     torch.manual_seed(0)
-    for t in [str(i) for i in range(5, 6)]:
-        model = EfficientSuppression(pretrained=True, features_at_block=t)
-        x = torch.rand(8, 3, 128, 128)
-        label = torch.randint(low=0, high=2, size=(8,))
-        out = model(x)
-        values, preds = torch.max(out, dim=1)
-        print(out)
-        print(label.data)
-        print(preds)
-        accurate = torch.mean((label.data == preds), dtype=torch.float32).item()
-        print(accurate)
-        break
+    # for t in [str(i) for i in range(5, 6)]:
+    #     model = EfficientSuppression(pretrained=True, features_at_block=t)
+    #     x = torch.rand(8, 3, 128, 128)
+    #     label = torch.randint(low=0, high=2, size=(8,))
+    #     out = model(x)
+    #     values, preds = torch.max(out, dim=1)
+    #     print(out)
+    #     print(label.data)
+    #     print(preds)
+    #     accurate = torch.mean((label.data == preds), dtype=torch.float32).item()
+    #     print(accurate)
+    #     break

@@ -169,7 +169,7 @@ def save_image(im, path,original_image):
     plt.imsave(path+"ori"+".png", original_image, format="png")
 
 
-def preprocess_image(pil_im, resize_im=True,image_size=256):
+def preprocess_image(pil_im, resize_im=True,image_size=128):
     """
         Processes image for CNNs
 
@@ -241,8 +241,8 @@ def get_positive_negative_saliency(gradient):
     returns:
         pos_saliency ( )
     """
-    print(gradient.min())
-    print(gradient.max())
+    # print(gradient.min())
+    # print(gradient.max())
     pos_saliency = (np.maximum(0, gradient) / gradient.max())
     neg_saliency = (np.maximum(0, -gradient) / -gradient.min())
     return pos_saliency, neg_saliency
@@ -276,20 +276,20 @@ def get_example_params(example_index,data_folder):
     # example_list = (("E:/HUST/2020/output_FaceSwap/FaceSwap15000_127578_093115.jpg", 0),
     #                 ("E:/HUST/2020/output_FaceSwap/FaceSwap15000_127578_093115.jpg", 0),
     #                 ("E:/HUST/2020/output_FaceSwap/FaceSwap15000_127578_093115.jpg", 0))
-    print(example_list)
+    # print(example_list)
     img_path = example_list[example_index][0]
     # img_path = example_list[0]
     target_class = example_list[example_index][1]
     # target_class = example_list[1]
     file_name_to_export = img_path[img_path.rfind('/')+1:img_path.rfind('.')]
     # Read image
-    print(file_name_to_export)
+    # print(file_name_to_export)
     original_image = Image.open(img_path).convert('RGB')
     # Process image
     prep_img = preprocess_image(original_image)
     # Define model
     # pretrained_model = models.alexnet(pretrained=True)
-    original_image = original_image.resize((256, 256), Image.ANTIALIAS)
+    original_image = original_image.resize((128, 128), Image.ANTIALIAS)
 
     original_image = np.uint8(original_image)
     return (original_image,

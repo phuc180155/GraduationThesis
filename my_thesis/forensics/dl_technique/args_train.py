@@ -320,6 +320,24 @@ def parse_args():
     parser_kfold_pairwise_dual_dab_cnn.add_argument("--weight_importance", type=float, default=2.0)
     parser_kfold_pairwise_dual_dab_cnn.add_argument("--margin", type=float, default=2.0)
 
+    parser_kfold_pairwise_cnn_cmultivit = sub_parser.add_parser('kfold_pairwise_cnn_cmultivit', help='My model')
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--n_folds",type=int,default=5,help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--what_fold",type=str,default='all',help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--use_trick",type=int,default=0,help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--backbone",type=str, default="efficient_net", required=False, help="Type of backbone")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--pretrained",type=int, default=1, required=False, help="Load pretrained backbone")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--unfreeze_blocks", type=int, default=-1, help="Unfreeze blocks in backbone")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--division_lr", type=int, default=0, help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--features_at_block", type=str, default='10', help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--patch_reso", type=str, default='1-2', help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--residual", type=int, default=1, help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--gammaagg_reso", type=str, help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--transformer_shareweight", type=int, default=0, help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--embedding_return", type=str, default='mlp_hidden', help="")
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--weight_importance", type=float, default=2.0)
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--margin", type=float, default=2.0)
+    parser_kfold_pairwise_cnn_cmultivit.add_argument("--freq_stream", type=str, default="rgb")
+
     parser_kfold_pairwise_dual_dab_cnn_multivit = sub_parser.add_parser('kfold_pairwise_dual_dab_cnn_multivit', help='My model')
     parser_kfold_pairwise_dual_dab_cnn_multivit.add_argument("--n_folds",type=int,default=5,help="")
     parser_kfold_pairwise_dual_dab_cnn_multivit.add_argument("--what_fold",type=str,default='all',help="")
@@ -347,6 +365,7 @@ def parse_args():
     parser_kfold_pairwise_dual_dab_cnn_multivit.add_argument("--dab_blocks", type=str, default='0_1_3_5', help="or [0_2_4_7_10]")
     parser_kfold_pairwise_dual_dab_cnn_multivit.add_argument("--topk_channels", type=float, default=1.0, help="or [0_2_4_7_10]")
     parser_kfold_pairwise_dual_dab_cnn_multivit.add_argument("--c",type=int, default=0, help="")
+    parser_kfold_pairwise_dual_dab_cnn_multivit.add_argument("--phase",type=int, default=0, help="")
     
     parser_triple_cnn_vit = sub_parser.add_parser('triple_cnn_vit', help='My model')
     parser_triple_cnn_vit.add_argument("--patch_size",type=int,default=7,help="patch_size in vit")
@@ -1883,12 +1902,13 @@ if __name__ == "__main__":
 
         args_txt += "sd{}".format(args.seed)
         args_txt += "_dr{}aug{}".format(args.dropout_in_mlp, args.augmentation)
+        args_txt += "_use{}".format("phase" if args.phase else "mag")
         print(len(args_txt))
         use_pretrained = True if args.pretrained or args.resume != '' else False
         model_name = "kfold_pairwise_dual_dab_cnn_multivit" if not args.c else "kfold_pairwise_dual_dab_cnn_cmultivit"
         train_kfold_pairwise_dual_stream(model_, what_fold=args.what_fold, n_folds=args.n_folds, use_trick=args.use_trick, weight_importance=args.weight_importance, margin=args.margin, train_dir=args.train_dir, val_dir=args.val_dir, test_dir=args.test_dir,  image_size=args.image_size, lr=args.lr, division_lr=args.division_lr, use_pretrained=use_pretrained,\
                            batch_size=args.batch_size, num_workers=args.workers, checkpoint=args.checkpoint, resume=args.resume, epochs=args.n_epochs, eval_per_iters=args.eval_per_iters, seed=args.seed,\
-                           adj_brightness=adj_brightness, adj_contrast=adj_contrast, es_metric=args.es_metric, es_patience=args.es_patience, model_name=model_name, args_txt=args_txt, augmentation=args.augmentation)
+                           adj_brightness=adj_brightness, adj_contrast=adj_contrast, es_metric=args.es_metric, es_patience=args.es_patience, model_name=model_name, args_txt=args_txt, augmentation=args.augmentation, usephase=args.phase)
 
     elif model == "kfold_dual_dab_cnn":
         from module.train_kfold import train_kfold_dual_stream
@@ -1999,5 +2019,28 @@ if __name__ == "__main__":
         use_pretrained = True if args.pretrained or args.resume != '' else False
         model_name = "kfold_pairwise_dual_dab_cnn_multivit_twooutput" if not args.c else "kfold_pairwise_dual_dab_cnn_cmultivit_twooutput"
         train_kfold_pairwise_dual_stream_twooutput(model_, what_fold=args.what_fold, n_folds=args.n_folds, use_trick=args.use_trick, weight_importance=args.weight_importance, margin=args.margin, train_dir=args.train_dir, val_dir=args.val_dir, test_dir=args.test_dir,  image_size=args.image_size, lr=args.lr, division_lr=args.division_lr, use_pretrained=use_pretrained,\
+                           batch_size=args.batch_size, num_workers=args.workers, checkpoint=args.checkpoint, resume=args.resume, epochs=args.n_epochs, eval_per_iters=args.eval_per_iters, seed=args.seed,\
+                           adj_brightness=adj_brightness, adj_contrast=adj_contrast, es_metric=args.es_metric, es_patience=args.es_patience, model_name=model_name, args_txt=args_txt, augmentation=args.augmentation)
+
+    elif model == "kfold_pairwise_cnn_cmultivit":
+        from module.train_for_visualization import train_kfold_pairwise_image_stream
+        from model.vision_transformer.cnn_vit.pairwise_cnn_cmultivit import PairwiseCNNCMultiViT
+            
+        model_ = PairwiseCNNCMultiViT(image_size=args.image_size, num_classes=1, \
+                dim=args.dim, depth=args.depth, heads=args.heads, mlp_dim=args.mlp_dim, dim_head=args.dim_head, dropout=0.,\
+                backbone=args.backbone, pretrained=args.pretrained,unfreeze_blocks=args.unfreeze_blocks,\
+                patch_reso=args.patch_reso, gammaagg_reso=args.gammaagg_reso,\
+                features_at_block=args.features_at_block,\
+                dropout_in_mlp=0.0, residual=args.residual, transformer_shareweight=args.transformer_shareweight, useKNN=args.useKNN, \
+                embedding_return=args.embedding_return, freq_stream=args.freq_stream)
+        
+        args_txt = "lr{}-{}_b{}_es{}_l{}_nf{}trick{}_ret{}_im{}_mar{}_md{}_bb{}pre{}_fatb{}_".format(args.lr, args.division_lr, args.batch_size, args.es_metric, args.loss, args.n_folds, args.use_trick, args.embedding_return, args.weight_importance, args.margin, args.mlp_dim, args.backbone, args.pretrained, args.features_at_block)
+        args_txt += "preso{}_greso{}_res{}_share{}_useKNN{}_freqstream{}_".format(args.patch_reso, args.gammaagg_reso, args.residual, args.transformer_shareweight, args.useKNN, args.freq_stream)
+        args_txt += "_sd{}".format(args.seed)
+        args_txt += "_dr{}aug{}".format(args.dropout_in_mlp, args.augmentation)
+        print(len(args_txt))
+        use_pretrained = True if args.pretrained or args.resume != '' else False
+        model_name = "kfold_pairwise_cnn_cmultivit"
+        train_kfold_pairwise_image_stream(model_, freq_stream=args.freq_stream, what_fold=args.what_fold, n_folds=args.n_folds, use_trick=args.use_trick, weight_importance=args.weight_importance, margin=args.margin, train_dir=args.train_dir, val_dir=args.val_dir, test_dir=args.test_dir,  image_size=args.image_size, lr=args.lr, division_lr=args.division_lr, use_pretrained=use_pretrained,\
                            batch_size=args.batch_size, num_workers=args.workers, checkpoint=args.checkpoint, resume=args.resume, epochs=args.n_epochs, eval_per_iters=args.eval_per_iters, seed=args.seed,\
                            adj_brightness=adj_brightness, adj_contrast=adj_contrast, es_metric=args.es_metric, es_patience=args.es_patience, model_name=model_name, args_txt=args_txt, augmentation=args.augmentation)

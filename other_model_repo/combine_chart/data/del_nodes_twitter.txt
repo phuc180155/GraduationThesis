@@ -1,0 +1,190 @@
+Accuracy: 0.9275
+MAP: 0.9501
+Precision_5: 0.9772
+Precision_10: 0.9877	Accuracy: 0.9266
+MAP: 0.9495
+Precision_5: 0.9776
+Precision_10: 0.9877	Accuracy: 0.9163
+MAP: 0.9420
+Precision_5: 0.9740
+Precision_10: 0.9858	Accuracy: 0.8902
+MAP: 0.9220
+Precision_5: 0.9606
+Precision_10: 0.9769	Accuracy: 0.8337
+MAP: 0.8771
+Precision_5: 0.9308
+Precision_10: 0.9544	Accuracy: 0.7359
+MAP: 0.7939
+Precision_5: 0.8623
+Precision_10: 0.8999	Accuracy: 0.6090
+MAP: 0.6854
+Precision_5: 0.7727
+Precision_10: 0.8273
+Accuracy: 0.9258
+MAP: 0.9488
+Precision_5: 0.9756
+Precision_10: 0.9872	Accuracy: 0.9241
+MAP: 0.9475
+Precision_5: 0.9756
+Precision_10: 0.9872	Accuracy: 0.9124
+MAP: 0.9392
+Precision_5: 0.9724
+Precision_10: 0.9850	Accuracy: 0.8933
+MAP: 0.9241
+Precision_5: 0.9624
+Precision_10: 0.9770	Accuracy: 0.8293
+MAP: 0.8745
+Precision_5: 0.9290
+Precision_10: 0.9549	Accuracy: 0.6966
+MAP: 0.7594
+Precision_5: 0.8334
+Precision_10: 0.8753	Accuracy: 0.5276
+MAP: 0.6089
+Precision_5: 0.6992
+Precision_10: 0.7634
+Accuracy: 0.9065
+MAP: 0.9336
+Precision_5: 0.9668
+Precision_10: 0.9801	Accuracy: 0.9051
+MAP: 0.9325
+Precision_5: 0.9648
+Precision_10: 0.9787	Accuracy: 0.8980
+MAP: 0.9276
+Precision_5: 0.9636
+Precision_10: 0.9782	Accuracy: 0.8807
+MAP: 0.9139
+Precision_5: 0.9546
+Precision_10: 0.9726	Accuracy: 0.8290
+MAP: 0.8757
+Precision_5: 0.9324
+Precision_10: 0.9577	Accuracy: 0.7384
+MAP: 0.7995
+Precision_5: 0.8733
+Precision_10: 0.9133	Accuracy: 0.6156
+MAP: 0.6948
+Precision_5: 0.7851
+Precision_10: 0.8447
+Accuracy: 0.6445
+MAP: 0.7429
+Precision_5: 0.8683
+Precision_10: 0.9295	Accuracy: 0.6212
+MAP: 0.7221
+Precision_5: 0.8505
+Precision_10: 0.9103	Accuracy: 0.5342
+MAP: 0.6473
+Precision_5: 0.7886
+Precision_10: 0.8688	Accuracy: 0.4628
+MAP: 0.5837
+Precision_5: 0.7301
+Precision_10: 0.8219	Accuracy: 0.3463
+MAP: 0.4670
+Precision_5: 0.6066
+Precision_10: 0.7151	Accuracy: 0.2530
+MAP: 0.3594
+Precision_5: 0.4697
+Precision_10: 0.5811	Accuracy: 0.1804
+MAP: 0.2697
+Precision_5: 0.3483
+Precision_10: 0.4519
+Accuracy: 0.8060
+MAP: 0.8675
+Precision_5: 0.9380
+Precision_10: 0.9383	Accuracy: 0.7831
+MAP: 0.8463
+Precision_5: 0.9192
+Precision_10: 0.9193	Accuracy: 0.7582
+MAP: 0.8198
+Precision_5: 0.8899
+Precision_10: 0.8902	Accuracy: 0.7396
+MAP: 0.8053
+Precision_5: 0.8799
+Precision_10: 0.8803	Accuracy: 0.7391
+MAP: 0.8003
+Precision_5: 0.8692
+Precision_10: 0.8694	Accuracy: 0.6619
+MAP: 0.7208
+Precision_5: 0.7839
+Precision_10: 0.7842	Accuracy: 0.6671
+MAP: 0.7228
+Precision_5: 0.7798
+Precision_10: 0.7799
+Accuracy: 0.9764
+MAP: 0.9853
+Precision_5: 0.9970
+Precision_10: 1.0000	Accuracy: 0.9039
+MAP: 0.9229
+Precision_5: 0.9457
+Precision_10: 0.9535	Accuracy: 0.5458
+MAP: 0.6183
+Precision_5: 0.7025
+Precision_10: 0.7478	Accuracy: 0.2883
+MAP: 0.3631
+Precision_5: 0.4461
+Precision_10: 0.5073	Accuracy: 0.1177
+MAP: 0.1669
+Precision_5: 0.2176
+Precision_10: 0.2541	Accuracy: 0.0713
+MAP: 0.1100
+Precision_5: 0.1465
+Precision_10: 0.1813	Accuracy: 0.0381
+MAP: 0.0708
+Precision_5: 0.1060
+Precision_10: 0.1351
+Accuracy: 0.2640
+MAP: 0.3857
+Precision_5: 0.5153
+Precision_10: 0.6445
+Full_time: 3813.9905	Accuracy: 0.2632
+MAP: 0.3845
+Precision_5: 0.5197
+Precision_10: 0.6450
+Full_time: 3641.3848	Accuracy: 0.2502
+MAP: 0.3681
+Precision_5: 0.4908
+Precision_10: 0.6225
+Full_time: 3466.4486	Accuracy: 0.2502
+MAP: 0.3681
+Precision_5: 0.4908
+Precision_10: 0.6225
+Full_time: 3466.4486	Accuracy: 0.2502
+MAP: 0.3681
+Precision_5: 0.4908
+Precision_10: 0.6225
+Full_time: 3466.4486	Accuracy: 0.2205
+MAP: 0.3298
+Precision_5: 0.4456
+Precision_10: 0.5576
+Full_time: 2173.0995	Accuracy: 0.1908
+MAP: 0.2917
+Precision_5: 0.3954
+Precision_10: 0.5009
+Full_time: 1741.3902
+Accuracy: 0.2282
+MAP: 0.2912
+Precision_5: 0.3447
+Precision_10: 0.4119
+Full_time: 6530.7093	Accuracy: 0.2212
+MAP: 0.2819
+Precision_5: 0.3331
+Precision_10: 0.3968
+Full_time: 6508.5239	Accuracy: 0.2035
+MAP: 0.2624
+Precision_5: 0.3117
+Precision_10: 0.3710
+Full_time: 6444.0287	Accuracy: 0.1963
+MAP: 0.2525
+Precision_5: 0.2994
+Precision_10: 0.3586
+Full_time: 6348.8740	Accuracy: 0.1862
+MAP: 0.2463
+Precision_5: 0.2979
+Precision_10: 0.3592
+Full_time: 6165.7295	Accuracy: 0.2088
+MAP: 0.2751
+Precision_5: 0.3364
+Precision_10: 0.4042
+Full_time: 6139.4008	Accuracy: 0.2474
+MAP: 0.3185
+Precision_5: 0.3870
+Precision_10: 0.4536
+Full_time: 5882.9692

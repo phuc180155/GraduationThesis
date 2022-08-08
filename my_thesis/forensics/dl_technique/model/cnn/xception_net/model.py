@@ -28,7 +28,6 @@ class ClassifierBlock(nn.Module):
 
         # FC2
         self.linear_2 = nn.Linear(512, out_features)
-        print(out_features)
 
     def forward(self, x):
         x = self.flatten(x)

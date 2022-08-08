@@ -1,0 +1,190 @@
+"Accuracy: 0.9400
+MAP: 0.9578
+Precision_5: 0.9780
+Precision_10: 0.9829"	"Accuracy: 0.9400
+MAP: 0.9572
+Precision_5: 0.9792
+Precision_10: 0.9850"	"Accuracy: 0.9408
+MAP: 0.9586
+Precision_5: 0.9789
+Precision_10: 0.9851"	"Accuracy: 0.9228
+MAP: 0.9448
+Precision_5: 0.9703
+Precision_10: 0.9793"	"Accuracy: 0.8927
+MAP: 0.9218
+Precision_5: 0.9547
+Precision_10: 0.9696"	"Accuracy: 0.7904
+MAP: 0.8397
+Precision_5: 0.8970
+Precision_10: 0.9264"	"Accuracy: 0.6829
+MAP: 0.7516
+Precision_5: 0.8314
+Precision_10: 0.8799"
+"Accuracy: 0.9384
+MAP: 0.9568
+Precision_5: 0.9779
+Precision_10: 0.9830"	"Accuracy: 0.9400
+MAP: 0.9572
+Precision_5: 0.9792
+Precision_10: 0.9850"	"Accuracy: 0.9411
+MAP: 0.9588
+Precision_5: 0.9792
+Precision_10: 0.9850"	"Accuracy: 0.9253
+MAP: 0.9467
+Precision_5: 0.9716
+Precision_10: 0.9806"	"Accuracy: 0.8927
+MAP: 0.9218
+Precision_5: 0.9547
+Precision_10: 0.9696"	"Accuracy: 0.7904
+MAP: 0.8397
+Precision_5: 0.8970
+Precision_10: 0.9264"	"Accuracy: 0.6168
+MAP: 0.6861
+Precision_5: 0.7670
+Precision_10: 0.8174"
+"Accuracy: 0.9404
+MAP: 0.9583
+Precision_5: 0.9781
+Precision_10: 0.9832"	"Accuracy: 0.9127
+MAP: 0.9373
+Precision_5: 0.9665
+Precision_10: 0.9759"	"Accuracy: 0.9299
+MAP: 0.9501
+Precision_5: 0.9725
+Precision_10: 0.9802"	"Accuracy: 0.9127
+MAP: 0.9373
+Precision_5: 0.9665
+Precision_10: 0.9759"	"Accuracy: 0.8891
+MAP: 0.9190
+Precision_5: 0.9550
+Precision_10: 0.9683"	"Accuracy: 0.8276
+MAP: 0.8718
+Precision_5: 0.9263
+Precision_10: 0.9491"	"Accuracy: 0.7228
+MAP: 0.7853
+Precision_5: 0.8609
+Precision_10: 0.9016"
+"Accuracy: 0.7549
+MAP: 0.8253
+Precision_5: 0.9154
+Precision_10: 0.9679"	"Accuracy: 0.7335
+MAP: 0.8097
+Precision_5: 0.9046
+Precision_10: 0.9628"	"Accuracy: 0.6681
+MAP: 0.7584
+Precision_5: 0.8737
+Precision_10: 0.9343"	"Accuracy: 0.6029
+MAP: 0.7078
+Precision_5: 0.8436
+Precision_10: 0.9150"	"Accuracy: 0.4775
+MAP: 0.5952
+Precision_5: 0.7363
+Precision_10: 0.8344"	"Accuracy: 0.3501
+MAP: 0.4791
+Precision_5: 0.6290
+Precision_10: 0.7464"	"Accuracy: 0.2256
+MAP: 0.3370
+Precision_5: 0.4474
+Precision_10: 0.5751"
+"Accuracy: 0.6967
+MAP: 0.8124
+Precision_5: 0.9620
+Precision_10: 0.9722"	"Accuracy: 0.6776
+MAP: 0.8009
+Precision_5: 0.9600
+Precision_10: 0.9688"	"Accuracy: 0.6629
+MAP: 0.7892
+Precision_5: 0.9531
+Precision_10: 0.9648"	"Accuracy: 0.6003
+MAP: 0.7479
+Precision_5: 0.9454
+Precision_10: 0.9643"	"Accuracy: 0.5954
+MAP: 0.7419
+Precision_5: 0.9364
+Precision_10: 0.9595"	"Accuracy: 0.5273
+MAP: 0.6835
+Precision_5: 0.8961
+Precision_10: 0.9393"	"Accuracy: 0.4688
+MAP: 0.6364
+Precision_5: 0.8647
+Precision_10: 0.9165"
+"Accuracy: 0.9984
+MAP: 0.9991
+Precision_5: 1.0000
+Precision_10: 1.0000"	"Accuracy: 0.8926
+MAP: 0.9138
+Precision_5: 0.9373
+Precision_10: 0.9486"	"Accuracy: 0.4782
+MAP: 0.5773
+Precision_5: 0.6965
+Precision_10: 0.7602"	"Accuracy: 0.1979
+MAP: 0.2992
+Precision_5: 0.4135
+Precision_10: 0.5202"	"Accuracy: 0.0792
+MAP: 0.1528
+Precision_5: 0.2133
+Precision_10: 0.3216"	"Accuracy: 0.0430
+MAP: 0.0920
+Precision_5: 0.1231
+Precision_10: 0.1843"	"Accuracy: 0.0296
+MAP: 0.0706
+Precision_5: 0.0953
+Precision_10: 0.1341"
+"Accuracy: 0.4661
+MAP: 0.5937
+Top_5: 0.7504
+Top_10: 0.8386
+Full_time: 9384.7886"	"Accuracy: 0.5035
+MAP: 0.6178
+Top_5: 0.7543
+Top_10: 0.8334
+Full_time: 7030.8446"	"Accuracy: 0.4812
+MAP: 0.5975
+Top_5: 0.7407
+Top_10: 0.8213
+Full_time: 8134.1915"	"Accuracy: 0.4054
+MAP: 0.5321
+Top_5: 0.6825
+Top_10: 0.7818
+Full_time: 8765.7609"	"Accuracy: 0.3767
+MAP: 0.4980
+Top_5: 0.6422
+Top_10: 0.7350
+Full_time: 6202.3190"	"Accuracy: 0.3354
+MAP: 0.4530
+Top_5: 0.5869
+Top_10: 0.6879
+Full_time: 4821.8940"	"Accuracy: 0.3071
+MAP: 0.4161
+Top_5: 0.5365
+Top_10: 0.6303
+Full_time: 3355.7855"
+"Accuracy: 0.3609
+MAP: 0.4777
+Top_5: 0.6141
+Top_10: 0.7131
+Full_time: 6146.1416"	"Accuracy: 0.4282
+MAP: 0.5439
+Top_5: 0.6825
+Top_10: 0.7754
+Full_time: 6172.5317"	"Accuracy: 0.3835
+MAP: 0.4942
+Top_5: 0.6211
+Top_10: 0.7183
+Full_time: 6034.3235"	"Accuracy: 0.3118
+MAP: 0.4217
+Top_5: 0.5429
+Top_10: 0.6413
+Full_time: 5860.9308"	"Accuracy: 0.2631
+MAP: 0.3681
+Top_5: 0.4789
+Top_10: 0.5843
+Full_time: 5866.3712"	"Accuracy: 0.2472
+MAP: 0.3487
+Top_5: 0.4573
+Top_10: 0.5554
+Full_time: 5446.1419"	"Accuracy: 0.2509
+MAP: 0.3477
+Top_5: 0.4448
+Top_10: 0.5392
+Full_time: 5564.8145"

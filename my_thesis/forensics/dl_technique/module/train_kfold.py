@@ -349,7 +349,7 @@ def train_kfold_image_stream(model_, what_fold='all', n_folds=5, use_trick=True,
             testacctotal = get_test_metric(step_ckcpoint_dir=step_ckcpoint, bestacc=step_model_saver.best_scores[1], model_type="normal")
             dest = osp.join(checkpoint, args_txt if resume == '' else '', "({:.4f}_{:.4f}_{:.4f})_{}_{}".format(step_model_saver.best_scores[0], testacctotal, step_model_saver.best_scores[1], 'fold' if resume == '' else 'resume', fold_idx))
             os.rename(src=ckc_pointdir, dst=dest)
-        return
+    return
 
 def eval_kfold_capsulenet(capnet, vgg_ext, dataloader, device, capsule_loss, adj_brightness=1.0, adj_contrast=1.0 ):
     capnet.eval()
@@ -400,6 +400,7 @@ def eval_kfold_capsulenet(capnet, vgg_ext, dataloader, device, capsule_loss, adj
 from model.cnn.capsule_net.model import VggExtractor, CapsuleNet
 from loss.capsule_loss import CapsuleLoss
 from torch.autograd import Variable
+
 def train_kfold_capsulenet(what_fold='all', n_folds=5, use_trick=True, train_dir = '', val_dir ='', test_dir = '', gpu_id=0, beta1=0.9, dropout=0.05, image_size=128, lr=3e-4, \
               batch_size=16, num_workers=4, checkpoint='', resume='', epochs=20, eval_per_iters=-1, seed=0, \
               adj_brightness=1.0, adj_contrast=1.0, es_metric='val_loss', es_patience=5, model_name="capsule", args_txt="", dropout_in_mlp=True, augmentation=False):
@@ -576,7 +577,7 @@ def train_kfold_capsulenet(what_fold='all', n_folds=5, use_trick=True, train_dir
                         test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros = eval_kfold_capsulenet(capnet, vgg_ext, dataloader_test, device, capsule_loss, adj_brightness=adj_brightness, adj_contrast=adj_brightness)
                         save_result(step_test_writer, log, global_step, global_loss/global_step, global_acc/global_step, test_loss, test_mac_acc, test_mic_acc, test_reals, test_fakes, test_micros, test_macros, is_epoch=False, phase="test")
                         # Save model:
-                        step_model_saver(global_step, [val_loss, test_mic_acc], step_ckcpoint, capnet)
+                        step_model_saver(global_step, [val_loss, test_mic_acc], step_ckcpoint, [capnet, vgg_ext], model_name='capsule')
                         step_model_saver.save_last_model(step_ckcpoint, capnet, global_step)
                         step_model_saver.save_model(step_ckcpoint, capnet, global_step, save_ckcpoint=False, global_acc=global_acc, global_loss=global_loss)
             
@@ -1106,7 +1107,7 @@ def eval_kfold_pairwise_dual_stream(model, weight_importance, dataloader, device
     
 def train_kfold_pairwise_dual_stream(model_, what_fold='all', n_folds=5, use_trick=True, weight_importance=2, margin=2, train_dir = '', val_dir ='', test_dir= '', image_size=128, lr=3e-4, division_lr=True, use_pretrained=False,\
               batch_size=16, num_workers=8, checkpoint='', resume='', epochs=30, eval_per_iters=-1, seed=0, \
-              adj_brightness=1.0, adj_contrast=1.0, es_metric='val_loss', es_patience=5, model_name="pairwise_dual_cnn_vit", args_txt="", augmentation=True):
+              adj_brightness=1.0, adj_contrast=1.0, es_metric='val_loss', es_patience=5, model_name="pairwise_dual_cnn_vit", args_txt="", augmentation=True, usephase=False):
 
     kfold = CustomizeKFold(n_folds=n_folds, train_dir=train_dir, val_dir=val_dir, trick=use_trick)
     next_fold=False
@@ -1151,8 +1152,8 @@ def train_kfold_pairwise_dual_stream(model_, what_fold='all', n_folds=5, use_tri
         # sys.stdout = sys.__stdout__
         # continue
 
-        dataloader_train, dataloader_val, num_samples = generate_dataloader_dual_cnn_stream_for_kfold_pairwise(train_dir, trainset, valset, image_size, batch_size, num_workers, augmentation=augmentation)
-        dataloader_test = generate_test_dataloader_dual_cnn_stream_for_kfold_pairwise(test_dir, image_size, batch_size, num_workers)    
+        dataloader_train, dataloader_val, num_samples = generate_dataloader_dual_cnn_stream_for_kfold_pairwise(train_dir, trainset, valset, image_size, batch_size, num_workers, augmentation=augmentation, usephase=usephase)
+        dataloader_test = generate_test_dataloader_dual_cnn_stream_for_kfold_pairwise(test_dir, image_size, batch_size, num_workers, usephase=usephase)    
     
         # Define optimizer (Adam) and learning rate decay
         init_lr = lr

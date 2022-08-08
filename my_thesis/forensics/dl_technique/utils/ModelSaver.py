@@ -25,7 +25,7 @@ class ModelSaver:
             return bool(cur_score > best_score)
         
         
-    def __call__(self, iter: int, cur_scores: List[float], checkpoint_dir: str, model: torch.nn.Module):
+    def __call__(self, iter: int, cur_scores: List[float], checkpoint_dir: str, model=None, model_name='other'):
         """
         Args:
             cur_scores (List[float]): must be respective to save_metrics.
@@ -38,19 +38,27 @@ class ModelSaver:
             metric = self.save_metrics[idx]
             if self.better(cur_score, best_score, metric):
                 # print("Better...")
-                self.save_checkpoint(iter, checkpoint_dir, model, metric, cur_score)
+                self.save_checkpoint(iter, checkpoint_dir, model, metric, cur_score, model_name=model_name)
                 self.best_scores[idx] = cur_score
             
-    def save_checkpoint(self, iter: int, checkpoint_dir: str, model: torch.nn.Module, metric: str, score: float):
+    def save_checkpoint(self, iter: int, checkpoint_dir: str, model: torch.nn.Module, metric: str, score: float, model_name='other'):
         cnt = 0
         for ckcpoint in os.listdir(checkpoint_dir):
             if metric in ckcpoint:
                 cnt += 1
                 os.remove(join(checkpoint_dir, ckcpoint))
                 ###########################################################
-                torch.save(model.state_dict(), join(checkpoint_dir, "best_{}_{}_{:.6f}.pt".format(metric, iter, score)))
+                if model_name != 'capsule':
+                    torch.save(model.state_dict(), join(checkpoint_dir, "best_{}_{}_{:.6f}.pt".format(metric, iter, score)))
+                else:
+                    torch.save(model[0].state_dict(), join(checkpoint_dir, "bestcapsule_{}_{}_{:.6f}.pt".format(metric, iter, score)))
+                    torch.save(model[1].state_dict(), join(checkpoint_dir, "bestvgg_{}_{}_{:.6f}.pt".format(metric, iter, score)))
         if cnt == 0:
-            torch.save(model.state_dict(), join(checkpoint_dir, "best_{}_{}_{:.6f}.pt".format(metric, iter, score)))            
+            if model_name != 'capsule':
+                torch.save(model.state_dict(), join(checkpoint_dir, "best_{}_{}_{:.6f}.pt".format(metric, iter, score)))
+            else:
+                torch.save(model[0].state_dict(), join(checkpoint_dir, "bestcapsule_{}_{}_{:.6f}.pt".format(metric, iter, score)))
+                torch.save(model[1].state_dict(), join(checkpoint_dir, "bestvgg_{}_{}_{:.6f}.pt".format(metric, iter, score)))
         if cnt == 2:
             print("Seem to be wrong. 2 checkpoint in one folder.")
             
